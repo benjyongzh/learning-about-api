@@ -14,9 +14,9 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get("/session", routes.session);
-app.get("/users", routes.user);
-app.get("/messages", routes.message);
+app.use("/session", routes.session);
+app.use("/users", routes.user);
+app.use("/messages", routes.message);
 
 // app.post("/users", (req, res) => {
 //   return res.send("POST http method on a user resource.");
