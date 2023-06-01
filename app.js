@@ -10,40 +10,41 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
 app.use((req, res, next) => {
-  req.me = models.users[1];
+  req.context = { models, me: models.users[1] };
   next();
 });
 
 app.get("/session", (req, res) => {
-  res.send(models.users[req.me.id]);
+  res.send(req.context.models.users[req.context.me.id]);
 });
 
 app.get("/users", (req, res) => {
-  return res.send(Object.values(models.users));
+  return res.send(Object.values(req.context.models.users));
 });
 
 app.get("/users/:id", (req, res) => {
-  return res.send(Object.values(models.users[req.params.id]));
+  return res.send(Object.values(req.context.models.users[req.params.id]));
 });
 
 app.get("/messages", (req, res) => {
-  return res.send(Object.values(models.messages));
+  return res.send(Object.values(req.context.models.messages));
 });
 
 app.get("/messages/:id", (req, res) => {
-  return res.send(Object.values(models.messages[req.params.id]));
+  return res.send(Object.values(req.context.models.messages[req.params.id]));
 });
 
 app.post("/messages", (req, res) => {
   const id = uuidv4();
-  const message = { id, text: req.body.text, userId: req.me.id };
-  models.messages[id] = message;
+  const message = { id, text: req.body.text, userId: req.context.me.id };
+  req.context.models.messages[id] = message;
   return res.send(message);
 });
 
 app.delete("/messages/:id", (req, res) => {
-  const { [req.params.id]: message, ...otherMessages } = models.messages;
-  models.messages = otherMessages;
+  const { [req.params.id]: message, ...otherMessages } =
+    req.context.models.messages;
+  req.context.models.messages = otherMessages;
   return res.send(message);
 });
 
