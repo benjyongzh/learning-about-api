@@ -1,0 +1,25 @@
+{
+  "name": "learning-about-api",
+  "version": "1.0.0",
+  "description": "A practice on creating APIs via Express and cURL, using res.json() to pass info to front ends.",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/benjyongzh/learning-about-api.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/benjyongzh/learning-about-api/issues"
+  },
+  "homepage": "https://github.com/benjyongzh/learning-about-api#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.1.3",
+    "express": "^4.18.2"
+  }
+}
